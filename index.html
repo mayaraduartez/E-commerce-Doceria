@@ -118,77 +118,63 @@
     </section>
     <section class="form">
       <div class="form-donut">
-        <form method="post" action="/pedido"></form>
-        <h3>Seu Donut Perfeito</h3>
-        <h3>Cobertura</h3>
-        <div class="sabores">
-        <input
-            type="checkbox"
-            id=""
-            name="favorite-checkbox"
-            value="favorite-button"
-          >Baunilha</input>
-        
-        
-          <input
-              type="checkbox"
-              id=""
-              name="favorite-checkbox"
-              value="favorite-button"
-            >Chocolate</input>
-
+        <form method="post" action="/pedido">
+          <h3>Seu Donut Perfeito</h3>
+          <h3>Cobertura</h3>
+          <div class="sabores">
             <input
-                type="checkbox"
-                id=""
-                name="favorite-checkbox"
-                value="favorite-button"
-              >Morango</input>
-            
-            
-              <input
-                  type="checkbox"
-                  id=""
-                  name="favorite-checkbox"
-                  value="favorite-button"
-                >Caramelo</input>
-              
-      </div>
-      <h3>Recheio</h3>
-      <div>
-        <input
-            type="checkbox"
-            id=""
-            name="favorite-checkbox"
-            value="favorite-button"
-          >Brigadeiro</input>
-          <input
-            type="checkbox"
-            id=""
-            name="favorite-checkbox"
-            value="favorite-button"
-          >Beijinho</input>
-          <input
-            type="checkbox"
-            id=""
-            name="favorite-checkbox"
-            value="favorite-button"
-          >Doce de leite</input>
-          <input
-            type="checkbox"
-            id=""
-            name="favorite-checkbox"
-            value="favorite-button"
-          >Nutella</input>
-      </div>
-      <h3>Quantidade</h3>
-      <div>
-        <button class="btn-quantity btn-decrement">-</button>
-        <input type="text" class="quantity" value="1" readonly />
-        <button class="btn-quantity btn-increment">+</button>
-      </div>
-      <h3>Total: R$ <span style="color: #cc7f91">00,00</span></h3>
-      <button class="btn " style="border: none;">Fazer pedido</button>
-    </form>
+              type="checkbox"
+              name="cobertura"
+              value="Baunilha"
+            >Baunilha</input>
+            <input
+              type="checkbox"
+              name="cobertura"
+              value="Chocolate"
+            >Chocolate</input>
+            <input
+              type="checkbox"
+              name="cobertura"
+              value="Morango"
+            >Morango</input>
+            <input
+              type="checkbox"
+              name="cobertura"
+              value="Caramelo"
+            >Caramelo</input>
+          </div>
+          <h3>Recheio</h3>
+          <div>
+            <input
+              type="checkbox"
+              name="recheio"
+              value="Brigadeiro"
+            >Brigadeiro</input>
+            <input
+              type="checkbox"
+              name="recheio"
+              value="Beijinho"
+            >Beijinho</input>
+            <input
+              type="checkbox"
+              name="recheio"
+              value="Doce de leite"
+            >Doce de leite</input>
+            <input
+              type="checkbox"
+              name="recheio"
+              value="Nutella"
+            >Nutella</input>
+          </div>
+          <h3>Quantidade</h3>
+          <div>
+            <button class="btn-quantity btn-decrement">-</button>
+            <input type="text" class="quantity" value="1" readonly />
+            <button class="btn-quantity btn-increment">+</button>
+          </div>
+          <h3>Total: R$ <span id="totalPrice" style="color: #cc7f91">00,00</span></h3>
+          <button class="btn " style="border: none;">Fazer pedido</button>
+        </form>
       </div>
     </section>
     <footer>
@@ -197,6 +183,8 @@
       <p>Telefone: (11) 1234-5678</p>
     </div>
     <div>
+      <p>Nosso instagram:</p>
+
       <div class="social-buttons">
         <a href="#" class="social-button instagram">
           <svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -278,15 +266,53 @@
 </script>
 <script>
   function scrollToFooter() {
-    const donutCardsSection = document.querySelector(footer);
-    donutCardsSection.scrollIntoView({ behavior: "smooth" });
+    const footerSection = document.querySelector('footer'); // Selecionar o elemento do rodapé
+    footerSection.scrollIntoView({ behavior: 'smooth' });
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const cardapioLink = document.querySelector(".ul");
-    cardapioLink.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent default link behavior
+  document.addEventListener('DOMContentLoaded', function () {
+    const phoneIcon = document.querySelector('.icon-phone');
+    phoneIcon.addEventListener('click', (event) => {
+      event.preventDefault();
       scrollToFooter();
     });
   });
 </script>
+
+<script>
+  const coberturaCheckboxes = document.querySelectorAll('input[name="cobertura"]');
+  const recheioCheckboxes = document.querySelectorAll('input[name="recheio"]');
+  const quantityInput = document.querySelector('.quantity');
+  const totalPriceSpan = document.getElementById('totalPrice');
+
+  coberturaCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateTotalPrice);
+  });
+
+  recheioCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateTotalPrice);
+  });
+
+  quantityInput.addEventListener('input', updateTotalPrice);
+
+  function updateTotalPrice() {
+    let price = 5; // Base price for 1 cobertura and 1 recheio
+
+    // Count selected checkboxes for cobertura and recheio
+    const selectedCoberturas = Array.from(coberturaCheckboxes).filter(checkbox => checkbox.checked).length;
+    const selectedRecheios = Array.from(recheioCheckboxes).filter(checkbox => checkbox.checked).length;
+
+    // Add extra price for additional coberturas and recheios
+    if (selectedCoberturas > 1) {
+      price += (selectedCoberturas - 1) * 2.5;
+    }
+
+    if (selectedRecheios > 1) {
+      price += (selectedRecheios - 1) * 2.5;
+    }
+
+    // Update total price display
+    totalPriceSpan.textContent = price.toFixed(2);
+  }
+</script>
+

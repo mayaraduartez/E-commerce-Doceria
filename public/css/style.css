@@ -1,18 +1,21 @@
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(90.15deg,  #ffcccc 18.00%, #f5a8a8 82.00%);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(90.15deg,  #ffcccc 18.00%, #f5a8a8 82.00%);
+  display: flex;
+  flex-direction: column; 
 }
 
 header {
-    background: linear-gradient(90.15deg,  #ffcccc 18.00%, #f5a8a8 82.00%);
-    padding: 1%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: linear-gradient(90.15deg,  #ffcccc 18.00%, #f5a8a8 82.00%);
+  padding: 1%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; 
 }
 
 .logo {
@@ -22,9 +25,113 @@ header {
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
+  list-style: none;
+  display: flex;
 }
+
+.landing-page {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 90vh; 
+  width: 100vw; 
+  flex-wrap: wrap; 
+  padding: 10px; 
+  box-sizing: border-box; 
+}
+
+.lado-1 {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 5%;
+  margin-bottom: 0;
+  max-width: 600px; /* Limita a largura máxima */
+  text-align: left;
+  padding-top: 60px;
+}
+
+.lado-1 h2 {
+  font-size: calc(2.5em + 2vw); /* Escala a fonte com a largura da viewport */
+  letter-spacing: 0.5em;
+  color: rgb(82, 210, 241);
+  margin-bottom: 20px;
+}
+
+.lado-1 p {
+  color: #fff;
+  font-size: calc(1em + 0.5vw); /* Escala a fonte com a largura da viewport */
+  margin: 10px 0;
+}
+
+.lado-1 .btn {
+  background-color: rgb(82, 210, 241);
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.lado-1 .cards-icon {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30%;
+  width: 100%;
+}
+
+.lado-1 .icon-item {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.lado-2 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5%;
+  padding-top: 60px;
+}
+
+.lado-2 .donut {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  filter: drop-shadow(8px 8px 10px rgba(34, 34, 34, 0.5)); /* Sombra suave e maior no lado direito e abaixo */
+}
+
+
+
+.lado-3 {
+  display: flex;
+    width: 5%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.lado-3 img {
+  width: 25%;
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 6vw; /* Responsivo baseado na largura da viewport */
+  letter-spacing: 0.2em; /* Ajusta o espaçamento entre letras */
+  margin-bottom: 10px;
+  text-align: left;
+  letter-spacing: 8px;
+  margin-bottom: 0px;
+  color: rgb(82, 210, 241);
+}
+
+
 
 nav li {
     margin-right: 2%;
@@ -37,21 +144,6 @@ nav li:last-child {
 nav a {
     text-decoration: none;
     color: #000;
-}
-
-section.landing-page {
-    text-align: center;
-    padding: 10% 0;
-}
-
-section.landing-page h1 {
-    font-size: 3%;
-}
-
-section.landing-page p {
-    font-size: 1%;
-    color: #555;
-    margin-top: 2%;
 }
 
 .btn {
@@ -158,8 +250,8 @@ label {
 }
 
 footer > div {
-    flex: 1; /* Faz com que todas as divs tenham a mesma largura */
-    margin: 0 10px; /* Espaçamento entre as divs */
+    flex: 1; 
+    margin: 0 10px; 
 }
 
    .social-buttons {
@@ -269,7 +361,7 @@ footer > div {
       transform: translatey (0px);
       animation: float 5s ease-in-out infinite;
     }
-  
+    
     @keyframes float {
       0% {
         transform: translatey(0px);
@@ -343,7 +435,9 @@ footer > div {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgb(255, 221, 238); 
     }
+    
   
     .logo {
       display: flex;
@@ -358,7 +452,7 @@ footer > div {
       display: flex;
       margin-right: 20px; /* Adiciona um espaçamento à direita do menu */
       gap: 25px;
-      padding-right: 80px;
+      padding-right: 100px;
     }
   
     .menu li {
@@ -374,20 +468,7 @@ footer > div {
       color: #fff;
     }
   
-    section.landing-page {
-      text-align: center;
-      padding: 40px 0;
-    }
-  
-    section.landing-page h1 {
-      font-size: 36px;
-    }
-  
-    section.landing-page p {
-      font-size: 18px;
-      color: #555;
-      margin-top: 20px;
-    }
+
   
     .btn {
       display: inline-block;
@@ -429,25 +510,9 @@ footer > div {
       width: 20px;
       padding: 5px;
     }
-    .lado-1 {
-      display: flex;
-      justify-content: left;
-      margin-left: 100px;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: 0px;
-    }
-    .lado-2 {
-      margin-left: 3%;
-    }
-    .landing-page {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-    }
-    h2 {
-      font-family: Georgia, "Times New Roman", Times, serif;
-    }
+    
+    
+    
 
     .form-donut{
         background-color: #fff;

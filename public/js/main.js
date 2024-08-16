@@ -1,42 +1,46 @@
 
-  document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
+    const addToCartBtns = document.querySelectorAll(".btn-add-to-cart");
+  
+    addToCartBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const donutCard = btn.closest(".donut-card");
+        const donutQuantityDiv = donutCard.querySelector(".donut-quantity");
+        donutQuantityDiv.style.display = "block";
+      });
+    });
+  
     const decrementBtns = document.querySelectorAll(".btn-decrement");
     const incrementBtns = document.querySelectorAll(".btn-increment");
-
+  
     decrementBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         handleQuantityChange(btn, -1);
       });
     });
-
+  
     incrementBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         handleQuantityChange(btn, 1);
       });
     });
-
+  
     function handleQuantityChange(btn, change) {
       const inputElement = btn.parentElement.querySelector(".quantity");
       let quantity = parseInt(inputElement.value);
+  
       quantity += change;
-
-      // Ensure the quantity doesn't go below 1
+  
       if (quantity < 1) {
-        quantity = 1;
+        quantity = 0;
+        btn.parentElement.style.display = "none"; // Esconder a div se a quantidade for 0
       }
-
+  
       inputElement.value = quantity;
     }
   });
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const addToCartBtn = document.getElementById("btnAddToCart");
-    const donutQuantityDiv = document.querySelector(".donut-quantity");
-
-    addToCartBtn.addEventListener("click", () => {
-      donutQuantityDiv.style.display = "block";
-    });
-  });
+  
+  
 
   function scrollToDonutCards() {
     const donutCardsSection = document.querySelector(".donut-cards");
